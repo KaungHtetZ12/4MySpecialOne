@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Love Letter | Eternal Promise 🌹</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+        /* RESET & OPTIMIZED FONTS - using system fonts for better performance */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            min-height: 100vh;
+            width: 100vw;
+            background: #0a0a1a;
+            background-image: radial-gradient(circle at 25% 30%, rgba(255, 215, 0, 0.06) 0%, #0a0a1a 90%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            font-family: system-ui, -apple-system, 'Inter', 'Segoe UI', sans-serif;
+            color: #fff;
+            position: relative;
+        }
+
+        /* --- Envelope Section --- */
+        #opening-section {
+            position: absolute;
+            z-index: 100;
+            text-align: center;
+            transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            will-change: transform, opacity;
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            cursor: pointer;
+            width: 280px;
+            height: 170px;
+            background: linear-gradient(135deg, #fff8f0, #fff0e0);
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,215,0,0.3);
+            margin: 0 auto;
+        }
+
+        .envelope-wrapper::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            border-top: 95px solid #ffe8d4;
+        }
+
+        .heart-seal {
+            position: absolute;
+            top: 42%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 52px;
+            animation: heartBeat 1.5s infinite ease-in-out;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2));
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        /* --- Carousel (Gallery) --- */
+        #carousel-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            position: relative;
+            will-change: opacity;
+        }
+
+        .carousel-main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+            padding: 0 15px;
+        }
+
+        .carousel-view {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 55vh;
+            position: relative;
+            overflow: visible;
+        }
+
+        .img-card {
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            height: 70%;
+            width: 20%;
+            filter: blur(3px) brightness(0.45);
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            flex-shrink: 0;
+            position: absolute;
+            will-change: transform, width, height, filter;
+            backface-visibility: hidden;
+            transform: translateZ(0);
+        }
+
+        .img-card.active {
+            height: 100%;
+            width: 56%;
+            filter: blur(0) brightness(1);
+            border: 2px solid rgba(255, 215, 0, 0.8);
+            z-index: 10;
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.5);
+            position: relative;
+        }
+
+        .img-card.left {
+            transform: translateX(-115%) scale(0.85) translateZ(0);
+            filter: blur(2px) brightness(0.5);
+            z-index: 5;
+        }
+
+        .img-card.right {
+            transform: translateX(115%) scale(0.85) translateZ(0);
+            filter: blur(2px) brightness(0.5);
+            z-index: 5;
+        }
+
+        .img-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+        }
+
+        #image-caption {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #FFD966;
+            font-weight: 400;
+            text-align: center;
+            max-width: 80%;
+            letter-spacing: 0.5px;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+            min-height: 55px;
+            padding: 0 16px;
+        }
+
+        .nav-btn {
+            background: rgba(20, 20, 35, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            color: #FFD966;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            position: absolute;
+            z-index: 25;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            transition: 0.2s ease;
+            touch-action: manipulation;
+        }
+
+        .nav-btn:active {
+            transform: scale(0.94);
+            background: #FFD966;
+            color: #1a1a2e;
+        }
+
+        .prev-btn { left: 8px; }
+        .next-btn { right: 8px; }
+
+        .bottom-section {
+            margin-top: 18px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .counter {
+            font-size: 0.85rem;
+            color: rgba(255,255,240,0.8);
+            background: rgba(255,215,0,0.15);
+            backdrop-filter: blur(4px);
+            padding: 6px 18px;
+            border-radius: 40px;
+            letter-spacing: 1px;
+        }
+
+        .final-btn {
+            background: linear-gradient(135deg, #D4AF37, #FFD700);
+            border: none;
+            padding: 12px 38px;
+            border-radius: 60px;
+            color: #1e1a2f;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            transition: 0.2s ease;
+            touch-action: manipulation;
+        }
+
+        .final-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.5);
+        }
+
+        /* --- Letter Section --- */
+        #letter-section {
+            display: none;
+            width: 92%;
+            max-width: 520px;
+            z-index: 200;
+            animation: slideUpFade 0.7s ease;
+            position: relative;
+        }
+
+        @keyframes slideUpFade {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .letter-paper {
+            background: #FFFDF5;
+            background-image: radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.03) 2%, transparent 2.5%);
+            background-size: 28px 28px;
+            padding: 40px 28px;
+            border-radius: 4px;
+            box-shadow: 0 30px 55px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,200,0.6);
+            color: #2c2418;
+            font-family: 'Special Elite', system-ui;
+            line-height: 1.65;
+            position: relative;
+            border-left: 6px solid #D4AF37;
+            z-index: 202;
+        }
+
+        .letter-content {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-top: 8px;
+            min-height: 240px;
+            color: #2a2418;
+            white-space: pre-wrap;
+        }
+
+        .btn-next-letter {
+            background: #2c2418;
+            color: #FFE4B5;
+            border: 1px solid #D4AF37;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: system-ui, sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-next-letter:active {
+            transform: scale(0.97);
+            background: #D4AF37;
+            color: #1e1a1a;
+        }
+
+        /* --- Premium Overlay --- */
+        .premium-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(8,8,25,0.94) 0%, rgba(3,3,15,0.99) 100%);
+            backdrop-filter: blur(14px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.9s ease;
+            pointer-events: none;
+        }
+        
+        .premium-card {
+            max-width: 650px;
+            width: 88%;
+            background: linear-gradient(145deg, rgba(30,25,45,0.96), rgba(18,15,30,0.98));
+            backdrop-filter: blur(6px);
+            border-radius: 32px;
+            padding: 2.8rem 2rem;
+            text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.6);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,175,55,0.2), 0 0 40px rgba(212,175,55,0.2);
+            transform: scale(0.96);
+            transition: transform 0.4s ease;
+            font-family: 'Georgia', serif;
+        }
+        
+        .premium-card h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #F5E7B2, #D4AF37, #FFE4A0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.75rem;
+        }
+        
+        .premium-divider {
+            width: 70px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #D4AF37, #FFD966, #D4AF37, transparent);
+            margin: 16px auto;
+        }
+        
+        .premium-message {
+            font-size: 1.55rem;
+            line-height: 1.4;
+            color: #F3E5C9;
+            margin: 20px 0;
+            font-weight: 400;
+        }
+        
+        .premium-sub {
+            font-size: 1rem;
+            color: #C9B27C;
+            letter-spacing: 1px;
+            margin-top: 12px;
+            font-family: system-ui, sans-serif;
+        }
+        
+        /* SUNFLOWER ANIMATION - KEPT FOREVER! */
+        .sunflower {
+            position: fixed;
+            pointer-events: none;
+            will-change: transform, top, opacity;
+            z-index: 999;
+            backface-visibility: hidden;
+        }
+        
+        @keyframes fallSoft {
+            0% { top: -10%; transform: rotate(0deg); opacity: 0; }
+            15% { opacity: 0.85; }
+            100% { top: 110%; transform: rotate(320deg); opacity: 0; }
+        }
+        
+        .floating-emoji {
+            position: absolute;
+            pointer-events: none;
+            will-change: transform, opacity;
+            z-index: 1002;
+            font-size: 20px;
+        }
+        
+        @keyframes floatEmoji {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+            100% { transform: translateY(100vh) rotate(380deg); opacity: 0; }
+        }
+        
+        @media (max-width: 600px) {
+            .premium-card { padding: 2rem 1.2rem; }
+            .premium-card h1 { font-size: 2rem; }
+            .premium-message { font-size: 1.25rem; }
+            .letter-content { font-size: 1rem; }
+            .img-card.active { width: 80%; }
+            .img-card.left { transform: translateX(-90%) scale(0.8); }
+            .img-card.right { transform: translateX(90%) scale(0.8); }
+            .nav-btn { width: 42px; height: 42px; font-size: 24px; }
+        }
+        
+        .paper-airplane {
+            position: fixed;
+            z-index: 1000;
+            font-size: 70px;
+            filter: drop-shadow(0 8px 18px rgba(0,0,0,0.5));
+            pointer-events: none;
+            transition: all 2s cubic-bezier(0.2, 0.9, 0.4, 1);
+            will-change: left, top, transform;
+        }
+    </style>
+</head>
+<body>
+
+<div id="opening-section">
+    <div class="envelope-wrapper" onclick="openEnvelope()">
+        <div class="heart-seal">🌻</div>
+    </div>
+    <p style="margin-top: 28px; font-weight: 300; letter-spacing: 2px; font-size: 0.9rem;">a gentle whisper from my heart</p>
+    <p style="margin-top: 12px; font-weight: 300; letter-spacing: 2px; font-size: 0.85rem;">Please tap 🌻 to continue...</p>
+</div>
+
+<div id="carousel-container">
+    <div class="carousel-main">
+        <button class="nav-btn prev-btn" onclick="prevCard()" aria-label="Previous">‹</button>
+        <div class="carousel-view" id="carousel-view"></div>
+        <button class="nav-btn next-btn" onclick="nextCard()" aria-label="Next">›</button>
+    </div>
+    <div id="image-caption"></div>
+    <div class="bottom-section">
+        <div class="counter" id="counter">1 / 15</div>
+        <button class="final-btn" onclick="showMessage()">Read My Letter For You</button>
+    </div>
+</div>
+
+<div id="letter-section">
+    <div class="letter-paper" id="letterPaper">
+        <div class="letter-content" id="typewriter"></div>
+        <div style="text-align: right; margin-top: 28px; font-weight: 500; font-size: 1rem;">
+            — From <br>
+            <span style="color: #b8860b;"><i>KaungHtetZaw</i></span>
+        </div>
+        <div id="nextLetterBtnContainer" style="display: flex; justify-content: center; margin-top: 28px;"></div>
+    </div>
+</div>
+
+<script>
+    (function(){
+        // Image gallery data
+        const imageUrls = [
+            "img1.jpg",   
+            "img2.jpg",  
+            "img3.jpg",  
+            "img4.jpg",  
+            "img5.jpg",  
+            "img6.jpg",  
+            "img7.jpg",  
+            "img8.jpg",  
+            "img9.jpg",  
+            "img10.jpg",  
+            "img11.jpg",  
+            "img12.jpg",  
+            "img13.jpg",  
+            "img14.jpg",  
+            "img15.jpg",  
+        ];
+        
+        const captions = [
+            "Your smile is the most beautiful thing my eyes have ever seen.",
+            "You are the golden hour of my every day.",
+            "I don't know what the future holds, but I know I want you to be part of it.",
+            "I would like to thank your mom and dad for bringing such a beautiful girl like you into this world.",
+            "I don't want to rush anything… I just want a chance to make you smile.",
+            "You are someone special to me, and I hope one day I can be special to you too.",
+            "You deserve the softest love, and I want to be that.",
+            "Every time I see you, I fall for you a little more.",
+            "Your existence makes the world more beautiful.",
+            "If I could make one wish, it would be to stay by your side.",
+            "Every glance of yours writes poetry in my silent world.",
+            "If I had to choose again, I would still choose you every time.",
+            "When I see you smile, the whole world feels brighter.",
+            "My heart didn't ask for permission… it just fell in love with you.",
+            "No matter what happens, I'll always respect you and your feelings."
+        ];
+        
+        let currentActive = 0;
+        let cardsArray = [];
+        
+        function buildGallery() {
+            const container = document.getElementById('carousel-view');
+            if (!container) return;
+            container.innerHTML = '';
+            for (let i = 0; i < imageUrls.length; i++) {
+                const card = document.createElement('div');
+                card.className = 'img-card';
+                const img = document.createElement('img');
+                img.src = imageUrls[i];
+                img.alt = `memory ${i+1}`;
+                img.loading = "lazy";
+                card.appendChild(img);
+                container.appendChild(card);
+            }
+            cardsArray = document.querySelectorAll('.img-card');
+            updateClasses();
+        }
+        
+        function updateClasses() {
+            if (!cardsArray.length) return;
+            const total = cardsArray.length;
+            cardsArray.forEach((card, i) => {
+                card.classList.remove('active', 'left', 'right');
+                if (i === currentActive) {
+                    card.classList.add('active');
+                } else if (i === (currentActive - 1 + total) % total) {
+                    card.classList.add('left');
+                } else if (i === (currentActive + 1) % total) {
+                    card.classList.add('right');
+                }
+            });
+            const captionEl = document.getElementById('image-caption');
+            if (captionEl) captionEl.innerText = captions[currentActive % captions.length];
+            const counterEl = document.getElementById('counter');
+            if (counterEl) counterEl.innerText = `${currentActive + 1} / ${total}`;
+        }
+        
+        window.nextCard = function() {
+            if (!cardsArray.length) return;
+            currentActive = (currentActive + 1) % cardsArray.length;
+            updateClasses();
+        };
+        
+        window.prevCard = function() {
+            if (!cardsArray.length) return;
+            currentActive = (currentActive - 1 + cardsArray.length) % cardsArray.length;
+            updateClasses();
+        };
+        
+        // GLOBAL SUNFLOWER FUNCTION - NEVER STOPS!
+        let sunflowerInterval = null;
+        
+        function createSingleSunflower() {
+            const flower = document.createElement('div');
+            flower.innerHTML = '🌻';
+            flower.className = 'sunflower';
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.fontSize = (Math.random() * 18 + 14) + 'px';
+            flower.style.animation = `fallSoft ${Math.random() * 3 + 3.5}s linear forwards`;
+            flower.style.opacity = "0.85";
+            document.body.appendChild(flower);
+            setTimeout(() => { if(flower && flower.remove) flower.remove(); }, 7000);
+        }
+        
+        function startPerpetualSunflowerRain() {
+            if (sunflowerInterval) clearInterval(sunflowerInterval);
+            sunflowerInterval = setInterval(() => {
+                createSingleSunflower();
+            }, 350); // Continuous sunflowers forever
+        }
+        
+        window.openEnvelope = function() {
+            const section = document.getElementById('opening-section');
+            section.style.opacity = "0";
+            section.style.transform = "translateY(-30px) scale(0.95)";
+            setTimeout(() => {
+                section.style.display = "none";
+                const container = document.getElementById('carousel-container');
+                container.style.display = "flex";
+                requestAnimationFrame(() => {
+                    container.style.opacity = "1";
+                });
+                // Start sunflowers - they will NEVER stop now
+                startPerpetualSunflowerRain();
+            }, 500);
+        };
+        
+        // Typewriter logic
+        let nextButtonCreatedFlag = false;
+        
+        function typeWriterWithCallback(text, elementId, speed, onComplete) {
+            let i = 0;
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            el.innerHTML = "";
+            function type() {
+                if (i < text.length) {
+                    el.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    if (onComplete) onComplete();
+                }
+            }
+            type();
+        }
+        
+        function onLetterTypingFinish() {
+            if (nextButtonCreatedFlag) return;
+            nextButtonCreatedFlag = true;
+            const container = document.getElementById('nextLetterBtnContainer');
+            if (container) {
+                const flyBtn = document.createElement('button');
+                flyBtn.innerText = 'See Next';
+                flyBtn.className = 'btn-next-letter';
+                flyBtn.onclick = transformLetterToAirplane;
+                container.appendChild(flyBtn);
+            }
+        }
+        
+        let airplaneTriggered = false;
+        
+        function transformLetterToAirplane() {
+            if (airplaneTriggered) return;
+            airplaneTriggered = true;
+            const letterPaper = document.getElementById('letterPaper');
+            if (!letterPaper) return;
+            const rect = letterPaper.getBoundingClientRect();
+            const startX = rect.left + rect.width/2;
+            const startY = rect.top + rect.height/2;
+            
+            letterPaper.style.transition = 'opacity 0.3s ease, transform 0.5s ease';
+            letterPaper.style.opacity = '0';
+            letterPaper.style.transform = 'scale(0.6) rotate(-2deg)';
+            
+            const airplane = document.createElement('div');
+            airplane.className = 'paper-airplane';
+            airplane.innerHTML = '✈️';
+            airplane.style.fontSize = '74px';
+            airplane.style.left = startX - 40 + 'px';
+            airplane.style.top = startY - 40 + 'px';
+            document.body.appendChild(airplane);
+            
+            setTimeout(() => {
+                airplane.style.left = (window.innerWidth + 150) + 'px';
+                airplane.style.top = '-120px';
+                airplane.style.transform = 'rotate(42deg) scale(1.5)';
+                airplane.style.opacity = '0.6';
+            }, 20);
+            
+            // floating particles (sunflowers still continue!)
+            for (let i = 0; i < 24; i++) {
+                const particle = document.createElement('div');
+                const icons = ['✨', '🌼', '💫', '🌾'];
+                particle.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+                particle.style.position = 'fixed';
+                particle.style.left = startX + (Math.random() - 0.5) * 100 + 'px';
+                particle.style.top = startY + (Math.random() - 0.5) * 80 + 'px';
+                particle.style.fontSize = Math.random() * 18 + 14 + 'px';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '999';
+                particle.style.transition = 'all 1.6s ease-out';
+                document.body.appendChild(particle);
+                setTimeout(() => {
+                    particle.style.transform = `translate(${(Math.random() - 0.5) * 250}px, ${-200 - Math.random() * 120}px) rotate(${Math.random() * 200}deg)`;
+                    particle.style.opacity = '0';
+                }, 10);
+                setTimeout(() => particle.remove(), 1800);
+            }
+            
+            setTimeout(() => {
+                if (airplane) airplane.remove();
+                const letterDiv = document.getElementById('letter-section');
+                if (letterDiv) letterDiv.style.display = 'none';
+                // SUNFLOWERS CONTINUE - NOT STOPPED!
+                showElegantFinalMessage();
+            }, 2100);
+        }
+        
+        function showElegantFinalMessage() {
+            const overlay = document.createElement('div');
+            overlay.className = 'premium-overlay';
+            document.body.appendChild(overlay);
+            
+            const card = document.createElement('div');
+            card.className = 'premium-card';
+            card.innerHTML = `
+                <h1>I Love You,<br>HsuHsuHtetMaung</h1>
+                <div class="premium-divider"></div>
+                <div class="premium-message">
+                    “Every part of you is a melody that my heart loves to hear.<br>
+                    I don't need you to change —<br>
+                    I just need you to stay.”
+                </div>
+                <div class="premium-divider" style="width: 50px;"></div>
+                <div class="premium-sub">
+                    🌙  no masks · no pretenses · just us  🌙
+                </div>
+                <div style="margin-top: 28px;"><span style="font-size: 2rem;">🌻</span></div>
+            `;
+            overlay.appendChild(card);
+            
+            setTimeout(() => { overlay.style.opacity = '1'; }, 30);
+            
+            // Extra floating emojis (sunflowers keep falling from background too)
+            let emojiInterval = setInterval(() => {
+                if (!document.body.contains(overlay)) {
+                    clearInterval(emojiInterval);
+                    return;
+                }
+                const emojiDiv = document.createElement('div');
+                const emojis = ['🌻', '✨', '✦', '💛', '🌙', '🌸'];
+                emojiDiv.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                emojiDiv.className = 'floating-emoji';
+                emojiDiv.style.left = Math.random() * 100 + '%';
+                emojiDiv.style.top = '-40px';
+                emojiDiv.style.fontSize = (Math.random() * 16 + 18) + 'px';
+                emojiDiv.style.opacity = '0.7';
+                emojiDiv.style.animation = `floatEmoji ${Math.random() * 4 + 5}s linear forwards`;
+                overlay.appendChild(emojiDiv);
+                setTimeout(() => { if(emojiDiv && emojiDiv.remove) emojiDiv.remove(); }, 7000);
+            }, 550);
+            
+            const styleAnim = document.createElement('style');
+            styleAnim.textContent = `
+                @keyframes floatEmoji {
+                    0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+                    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+                }
+                @keyframes softGlow {
+                    0% { box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,175,55,0.3); }
+                    100% { box-shadow: 0 35px 70px rgba(0,0,0,0.7), 0 0 0 2px rgba(212,175,55,0.5); }
+                }
+            `;
+            document.head.appendChild(styleAnim);
+            card.style.animation = 'softGlow 2.2s infinite alternate';
+            
+            const resetHint = document.createElement('div');
+            resetHint.style.position = 'absolute';
+            resetHint.style.bottom = '20px';
+            resetHint.style.left = '0';
+            resetHint.style.right = '0';
+            resetHint.style.textAlign = 'center';
+            resetHint.style.fontSize = '0.7rem';
+            resetHint.style.color = 'rgba(212,175,55,0.5)';
+            resetHint.innerHTML = '⟳ refresh to begin anew';
+            overlay.appendChild(resetHint);
+        }
+        
+        window.showMessage = function() {
+            const carousel = document.getElementById('carousel-container');
+            carousel.style.opacity = '0';
+            setTimeout(() => {
+                carousel.style.display = 'none';
+                const letterDiv = document.getElementById('letter-section');
+                letterDiv.style.display = 'block';
+                const paper = document.getElementById('letterPaper');
+                if (paper) {
+                    paper.style.opacity = '1';
+                    paper.style.transform = 'rotate(-1deg) scale(1)';
+                }
+                nextButtonCreatedFlag = false;
+                airplaneTriggered = false;
+                const btnContainer = document.getElementById('nextLetterBtnContainer');
+                if (btnContainer) btnContainer.innerHTML = '';
+                
+                const loveText = "To the girl who holds my heart, I want you to know that you are the most beautiful thing that has ever happened to me. Every moment I spend with you feels like a dream I never want to wake up from. When it comes to you, my biggest goal is to keep you happy and make sure your smile never fades. Please know that when I told you I loved you, it wasn't just for a moment or for fun. I'm thinking about our long-term future together; I chose you with the intention of staying by your side for the rest of my life. I'll be right here, patiently waiting for the answer from your heart.";
+                
+                typeWriterWithCallback(loveText, "typewriter", 55, onLetterTypingFinish);
+            }, 450);
+        };
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            buildGallery();
+        });
+    })();
+</script>
+</body>
+</html>
